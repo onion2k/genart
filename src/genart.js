@@ -21,8 +21,8 @@ var r = new Rune({
 
 let sq = [];
 
-let c = 24;
-let g = 15;
+let c = 16;
+let g = 16;
 let s = (primitives.size-(g*c)) / c;
 
 for (let i=0; i<(c*c); i++) {
@@ -37,13 +37,11 @@ for (let i=0; i<(c*c); i++) {
     group.vec = new Rune.Vector(x, y);
     group.move(x, y);
 
-    // group.rotate(3*(i%7), x+s/2, y+s/2);
-
     let dist = group.vec.distance(primitives.center);
 
     r.rect(0, 0, s, s, group)
         .stroke(false)
-        .fill('hsv', 0, 0, Rune.map(dist, 0, primitives.size/1.3, 50, 100));
+        .fill('hsv', 192, 100, Rune.map(dist, 0, primitives.size/1.3, 50, 100));
 
     sq.push(group);
 
@@ -55,15 +53,19 @@ let counter = 0;
 
 r.on('update', () => {
 
+    counter++;
     delta = performance.now() - ts;
     ts = performance.now();
 
-    sq.forEach((group) => {
+    sq.forEach((group, i) => {
+
         let dist = group.vec.distance(primitives.center);
-        group.rotate(group.state.rotation+1+(Helpers.toPercent(dist,primitives.width)/25), group.state.x + (s/2), group.state.y + (s/2));
-        // group.move(Math.sin(counter++), 0, true);
-    })
+
+        group.rotate(group.state.rotation+1+(Helpers.toPercent(dist,primitives.width)/5), group.state.x + (s/2), group.state.y + (s/2));
+
+        group.move(Math.sin((counter+(i%c))/10),Math.cos((counter+(i%c))/10),true);
+
+    });
 });
 
 r.play();    
-
