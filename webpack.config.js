@@ -38,7 +38,7 @@ module.exports = {
         //     hashFuncNames: ['sha256', 'sha384'],
         //     enabled: true
         // }),
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({ template: 'src/index.html' }),
         new ExtractTextPlugin("genart.css"),
     ]
 };
