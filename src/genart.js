@@ -15,146 +15,142 @@ primitives.size = primitives.height * 0.75;
 primitives.offset = { x: primitives.widthHalf - primitives.size / 2, y: primitives.heightHalf - primitives.size / 2 }
 
 let r;
+r = new Rune({
+    container: "#art",
+    width: primitives.width,
+    height: primitives.height
+});
+r.on('update', () => {});
+r.play();
 
 let ts = performance.now();
 let delta = 0;
 let counter = 0;
-let sq;
 
-function bluesquares() {
+class art {
 
-    if (r!==undefined) { delete r.el; }
-    
-    r = new Rune({
-        container: "#art",
-        width: primitives.width,
-        height: primitives.height
-    });    
+    constructor(){
 
-    sq = [];
-    
-    let c = 16;
-    let g = 16;
-    let s = (primitives.size-(g*c)) / c;
-    
-    for (let i=0; i<(c*c); i++) {
-    
-        let t = i % c;
-        let l = Math.floor(i / c);
-        
-        var group = r.group();
-        let x = primitives.offset.x + t*(s+g);
-        let y = primitives.offset.y + l*(s+g);
-        
-        group.vec = new Rune.Vector(x, y);
-        group.move(x, y);
-    
-        let dist = group.vec.distance(primitives.center);
-    
-        r.rect(0, 0, s, s, group)
-            .stroke(false)
-            .fill('hsv', 192, 100, Rune.map(dist, 0, primitives.size/1.3, 50, 100));
-    
-        sq.push(group);
-    
     }
-    
-    r.on('update', () => {
-    
-        counter++;
-        delta = performance.now() - ts;
-        ts = performance.now();
-    
-        sq.forEach((group, i) => {
-    
+
+    bluesquares() {
+
+        for (var x=r.stage.children.length-1;x>=0;x--) {
+            r.stage.remove(r.stage.children[x]);
+        }
+        r.off('update');
+        
+        let sq = [];
+        
+        let c = 16;
+        let g = 16;
+        let s = (primitives.size-(g*c)) / c;
+        
+        for (let i=0; i<(c*c); i++) {
+        
+            let t = i % c;
+            let l = Math.floor(i / c);
+            
+            var group = r.group();
+            let x = primitives.offset.x + t*(s+g);
+            let y = primitives.offset.y + l*(s+g);
+            
+            group.vec = new Rune.Vector(x, y);
+            group.move(x, y);
+        
             let dist = group.vec.distance(primitives.center);
-    
-            group.rotate(group.state.rotation+1+(Helpers.toPercent(dist,primitives.width)/5), group.state.x + (s/2), group.state.y + (s/2));
-    
+        
+            r.rect(0, 0, s, s, group)
+                .stroke(false)
+                .fill('hsv', 192, 100, Rune.map(dist, 0, primitives.size/1.3, 50, 100));
+        
+            sq.push(group);
+        
+        }
+        
+        r.on('update', () => {
+        
+            counter++;
+            delta = performance.now() - ts;
+            ts = performance.now();
+        
+            sq.forEach((group, i) => {
+        
+                let dist = group.vec.distance(primitives.center);
+        
+                group.rotate(group.state.rotation+1+(Helpers.toPercent(dist,primitives.width)/5), group.state.x + (s/2), group.state.y + (s/2));
+        
+            });
         });
-    });
-     
-    r.play();
 
-}
-
-function redsquares() {
-
-    console.log('red');
-
-    console.log(sq);
-
-    if (r !== undefined) {
-        r.pause();
-        sq.forEach((group,i)=>{ group.removeParent();});
-        // r = new Rune({
-        //     container: "#art",
-        //     width: primitives.width,
-        //     height: primitives.height
-        // });
-    }
-
-    return;
-
-    r = new Rune({
-        container: "#art",
-        width: primitives.width,
-        height: primitives.height
-    });    
-
-    let sq = [];
-    
-    let c = 16;
-    let g = 16;
-    let s = (primitives.size-(g*c)) / c;
-    
-    for (let i=0; i<(c*c); i++) {
-    
-        let t = i % c;
-        let l = Math.floor(i / c);
-        
-        var group = r.group();
-        let x = primitives.offset.x + t*(s+g);
-        let y = primitives.offset.y + l*(s+g);
-        
-        group.vec = new Rune.Vector(x, y);
-        group.move(x, y);
-    
-        let dist = group.vec.distance(primitives.center);
-    
-        r.rect(0, 0, s, s, group)
-            .stroke(false)
-            .fill('hsv', 64, 100, Rune.map(dist, 0, primitives.size/1.3, 50, 100));
-    
-        sq.push(group);
-    
     }
     
-    r.on('update', () => {
-    
-        counter++;
-        delta = performance.now() - ts;
-        ts = performance.now();
-    
-        sq.forEach((group, i) => {
-    
+    rainbowheart() {
+        
+        for (var x=r.stage.children.length-1;x>=0;x--) {
+            r.stage.remove(r.stage.children[x]);
+        }
+        r.off('update');
+        
+        let sq = [];
+        
+        let c = 21;
+        let g = 13;
+        let s = (primitives.size-(g*c)) / c;
+
+        var base = r.group();
+        
+        for (let i=0; i<(c*c); i++) {
+        
+            let t = i % c;
+            let l = Math.floor(i / c);
+            
+            var group = r.group(0,0,base);
+            let x = primitives.offset.x + t*(s+g);
+            let y = primitives.offset.y + l*(s+g);
+            
+            group.vec = new Rune.Vector(x, y);
+            group.move(x, y);
+        
             let dist = group.vec.distance(primitives.center);
-    
-            group.rotate(group.state.rotation+1+(Helpers.toPercent(dist,primitives.width)/5), group.state.x + (s/2), group.state.y + (s/2));
-    
+        
+            r.rect(0, 0, s, s, group)
+                .stroke('#ffffff')
+                .fill('hsv', Rune.map(dist, 0, primitives.size/1.8, 256, 0), 100, 100);
+        
+            sq.push(group);
+        
+        }
+
+        r.on('update', () => {
+        
+            counter++;
+            delta = performance.now() - ts;
+            ts = performance.now();
+
+            let f = Math.sin(counter/100);
+        
+            sq.forEach((group, i) => {
+                
+                group.move((((i%c)-c/2) * f * 0.01), ((Math.floor(i/c)-c/2) * f * 0.01), true);
+                group.rotate(group.state.rotation+1, group.state.x + (s/2), group.state.y + (s/2));
+
+            });
         });
-    });
 
-    r.play();
+    }
+
+    switchTo(a) {
+        switch (a) {
+            case "bluesquares": this.bluesquares(); break;
+            case "rainbowheart": this.rainbowheart(); break;
+        }
+    }
 
 }
 
-bluesquares();
-
-let arts = {
-    'bluesquares': ()=>{ bluesquares(); },
-    'redsquares':  ()=>{ redsquares(); }
-}
+let _art = new art();
+_art.bluesquares();
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -162,8 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     l.forEach((l) => {
         l.addEventListener('click', (e) => {
-            console.log(e.target.getAttribute('data-art'));
-            arts[e.target.getAttribute('data-art')]();
+            _art.switchTo(e.target.getAttribute('data-art'));
         })
     });
 
