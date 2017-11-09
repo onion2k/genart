@@ -14,8 +14,8 @@ export default function(primitives, r) {
     
     let sq = [];
     
-    let c = 21;
-    let g = 13;
+    let c = 12;
+    let g = 8;
     let s = (primitives.size-(g*c)) / c;
 
     var base = r.group();

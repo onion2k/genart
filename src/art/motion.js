@@ -15,7 +15,7 @@ export default function(primitives, r) {
     let sq = [];
     
     let c = 12;
-    let g = 12;
+    let g = 20;
     let s = (primitives.size-(g*c)) / c;
     
     for (let i=0; i<(c*c); i++) {
@@ -32,9 +32,9 @@ export default function(primitives, r) {
     
         let dist = group.vec.distance(primitives.center);
     
-        r.rect(0, 0, s, s, group)
-            .stroke(false)
-            .fill('hsv', 192, 100, Rune.map(dist, 0, primitives.size/1.3, 50, 100));
+        r.circle(0, 0, s, group)
+            .stroke('#ffffff')
+            .fill('hsv', 0, 100, 100);
     
         sq.push(group);
     
@@ -47,11 +47,12 @@ export default function(primitives, r) {
         ts = performance.now();
     
         sq.forEach((group, i) => {
-    
-            let dist = group.vec.distance(primitives.center);
-    
-            group.rotate(group.state.rotation+1+(Helpers.toPercent(dist,primitives.width)/5), group.state.x + (s/2), group.state.y + (s/2));
-    
+
+            group.move(1, 1, true);
+
+            if (group.state.x > primitives.width+s) { group.move(-1*s, group.state.y); }
+            if (group.state.y > primitives.height+s) { group.move(group.state.x, -1*s); }
+            
         });
     });
 

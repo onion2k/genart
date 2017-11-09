@@ -14,7 +14,7 @@ export default function(primitives, r) {
     
     let sq = [];
     
-    let c = 20;
+    let c = 12;
     let s = 4;
     let g = (primitives.size-(c*s)) / c;
     

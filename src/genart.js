@@ -5,6 +5,7 @@ import Helpers from './Helpers';
 import bluesquares from './art/bluesquares';
 import rainbowgrid from './art/rainbowgrid';
 import lightgrid from './art/lightgrid';
+import motion from './art/motion';
 
 const container = document.getElementById('art');
 const primitives = {
@@ -14,7 +15,7 @@ const primitives = {
     heightHalf: container.clientHeight / 2,
     center: new Rune.Vector(container.clientWidth/2, container.clientHeight/2),
 }
-primitives.size = primitives.height * 0.75;
+primitives.size = primitives.height;
 primitives.offset = { x: primitives.widthHalf - primitives.size / 2, y: primitives.heightHalf - primitives.size / 2 }
 
 let r = new Rune({
@@ -32,6 +33,7 @@ class art {
             case "bluesquares": bluesquares(primitives, r); break;
             case "lightgrid": lightgrid(primitives, r); break;
             case "rainbowgrid": rainbowgrid(primitives, r); break;
+            case "motion": motion(primitives, r); break;
         }
     }
 
