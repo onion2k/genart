@@ -5,7 +5,7 @@ import Helpers from './Helpers';
 import bluesquares from './art/bluesquares';
 import rainbowgrid from './art/rainbowgrid';
 import lightgrid from './art/lightgrid';
-import leafmotion from './art/leafmotion';
+import dancingleaves from './art/dancingleaves';
 
 const container = document.getElementById('art');
 const primitives = {
@@ -33,7 +33,7 @@ class art {
             case "bluesquares": bluesquares(primitives, r); break;
             case "lightgrid": lightgrid(primitives, r); break;
             case "rainbowgrid": rainbowgrid(primitives, r); break;
-            case "leafmotion": leafmotion(primitives, r); break;
+            case "dancingleaves": dancingleaves(primitives, r); break;
         }
     }
 

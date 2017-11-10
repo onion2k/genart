@@ -2,6 +2,10 @@ import Rune from 'rune.js';
 import Svg from 'rune.svg.js';
 import Helpers from '../Helpers';
 
+import bezier from 'bezier-easing';
+
+const easing = bezier(0.25, 0.77, 0.84, 0.41);
+
 let ts = performance.now();
 let delta = 0;
 let counter = 0;
@@ -38,10 +42,8 @@ export default function(primitives, r) {
     
         let dist = group.vec.distance(primitives.center);
         let leaf = svgLeafGroup.copy().scale(0.25).fill('hsv', 0+(Math.random()*64), 100, 100);
-        leaf.move(25, 35);
-        
+
         group.add(leaf);
-        
         sq.push(group);
     
     }
@@ -51,11 +53,14 @@ export default function(primitives, r) {
         counter++;
         delta = performance.now() - ts;
         ts = performance.now();
+
+        let b = Rune.map(easing(((counter/5)%100)/100), 0, 1, 0, 360);
     
         sq.forEach((group, i) => {
 
-            group.rotate(group.state.rotation+1-(2*(i%2)),group.state.x,group.state.y);
-            
+            group.rotate(b*(1-(2*(i%2))),group.state.x,group.state.y);
+            group.children[0].rotate(group.children[0].state.rotation+1*(1-(2*(i%2))),25,5);
+
         });
     });
 

@@ -12,9 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bezier-easing": "^2.0.3",
     "copy-webpack-plugin": "^4.2.0",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
+    "fs": "0.0.1-security",
     "html-webpack-plugin": "^2.30.1",
     "rune.font.js": "0.0.4",
     "rune.js": "^1.1.5",

@@ -40,5 +40,8 @@ module.exports = {
         // }),
         new HtmlWebpackPlugin({ template: 'src/index.html' }),
         new ExtractTextPlugin("genart.css"),
-    ]
+    ],
+    node: {
+        fs: 'empty'
+    }
 };
