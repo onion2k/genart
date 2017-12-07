@@ -6,6 +6,7 @@ import bluesquares from './art/bluesquares';
 import rainbowgrid from './art/rainbowgrid';
 import lightgrid from './art/lightgrid';
 import dancingleaves from './art/dancingleaves';
+import allthewaydown from './art/triangles';
 
 const container = document.getElementById('art');
 const primitives = {
@@ -34,6 +35,7 @@ class art {
             case "lightgrid": lightgrid(primitives, r); break;
             case "rainbowgrid": rainbowgrid(primitives, r); break;
             case "dancingleaves": dancingleaves(primitives, r); break;
+            case "allthewaydown": allthewaydown(primitives, r); break;
         }
     }
 
